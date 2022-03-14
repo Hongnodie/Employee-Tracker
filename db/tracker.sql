@@ -4,7 +4,6 @@ USE tracker_db;
 CREATE TABLE department (
     id INT (10),
     name VARCHAR (50),
-    PRIMARY KEY (`id`)
 );
 CREATE TABLE role (
     id INT (10),
@@ -12,7 +11,6 @@ CREATE TABLE role (
     salary FLOAT (10),
     department_id INT (10),
     FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE,
-    PRIMARY KEY (`id`) 
 );
 CREATE TABLE employee (
     id INT (10),
