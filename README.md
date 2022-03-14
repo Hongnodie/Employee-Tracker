@@ -27,7 +27,6 @@
   AS a business owner <br>
   I want to be able to view and manage the departments, roles, and employees in my company <br>
   SO that I can organize and plan my business. <br>
-  
   </details>
 
   <details>
@@ -88,10 +87,8 @@
   > AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
   > LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  > SOFTWARE.
-    
+  > SOFTWARE.    
   </details>
-    
 
   ## Contributing
 
@@ -101,6 +98,6 @@
 
   If you have any questions about the project you can reach out to me via email or GitHub with the information below. 
 
-  >Email: Hongnodie@gmail.com 
+  >Email: 92ganhong@gmail.com 
 
   >GitHub : [Hongnodie](https://github.com/Hongnodie)
