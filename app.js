@@ -3,7 +3,7 @@ const path = require("path")
 const fs = require("fs")
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
-// const cTable = require('console.table');
+const cTable = require('console.table');
 
 // routing to mysql database build up
 const db = mysql.createConnection(
@@ -167,28 +167,24 @@ function view() {
         }
     )
     
-    // function viewEmployee() {
-    //     let query = "SELECT * FROM employee"
+    function viewEmployee() {
+        let viewquery = "SELECT id, first_name, last_name, title AS job_titles FROM role WHERE id=employee_role_id"; //, department FROM department WHERE id=employee_role_id, salary AS salaries FROM role WHERE id=employee_role_id, manager_name AS manager FROM employee
+        db.query(viewquery, function (err, res) {
+            console.table(res);
+            startquestion();
+        })
+    }
     
-    //     connection.query(query, function (err, res) {
-    //         console.table(res)
-    //         start()
-    //     })
-    // }
+    function viewDepartment() {
+
+
+    }
     
-    // function viewDepartment() {
-    //     let query = "SELECT * FROM department"
-    //     connection.query(query, function (err, res) {
-    //         console.table(res)
-    //         start()
-    //     })
-    // }
-    
-    // function viewRole() {
-    //     let query = "SELECT * FROM role"
-    //     connection.query(query, function (err, res) {
-    //         console.table(res)
-    //         start()
-    //     })
-    // }
+    function viewRole() {
+
+    }
+}
+
+function updateRole() {
+
 }
