@@ -11,9 +11,10 @@ const db = mysql.createConnection(
       host: 'localhost',
       user: 'root',
       password: 'root',
-      database: 'tracker_db'
+      database: 'tracker_db',
+      port: 3306, // Port of localhost; self-defined; if not 3306
     },
-    console.log(`Connected to the tracker_db database.`)
+    console.log(`Connected to the tracker_db database.`)    // confirmation of connected
 );
 
 db.connect(function (err) {
@@ -38,7 +39,7 @@ function startquestion() {
                     view();
                     break;
                 case "Update":
-                    updateRole();
+                    updateEmployeeRole();
                     break;
                 case "Exit":
                     process.exit(0);
@@ -84,24 +85,48 @@ function add() {
                 message: "What is the employee's last name?"
             }, 
             {
-                name: "manager_name",
+                name: "role_id",
+                type: "number",
+                message: "What is the employee's role id number?"
+            },
+            {
+                name: "manager_id",
                 type: "input",
-                message: "Who is the manager of this role?"
+                message: "What is the manager's id number?"
+            },
+            {
+                name: "id",
+                type: "number",
+                message: "What is the employee's id?"
             },
         ])
-        .then((res) => {
-            let query = db.query(`INSERT INTO employee (first_name, last_name, manager_name) 
-            VALUES (res.first_name, res.last_name, res.manager_name)`,
-            (err, res) => {
-                if (err) throw err
-                console.log(res)
-            })
-            startquestion();
+        //update mysql table and display in console.table
+        .then(function (res) {
+            console.table(res)
+            let query = connection.query("INSERT INTO employee SET ?",
+                {
+                    first_name: res.first_name,
+                    last_name: res.last_name,
+                    role_id: res.role_id,
+                    manager_id: res.manager_id,
+                    id: res.id
+
+                },
+                function (err, res) {
+                    if (err) throw err
+                    console.log(res)
+                })
+        startquestion();
         })
     }
 
     function addRole() {
         inquirer.prompt([
+            {
+                name: "ID_PK",
+                type: "number",
+                message: "What is the ID of the role?"
+            },
             {
                 name: "title",
                 type: "input",
@@ -112,10 +137,20 @@ function add() {
                 type: "number",
                 message: "What is salary of the role?"
             },
+            {
+                name: "department_id",
+                type: "number",
+                message: "What is the id of department that this role belongs to?"
+            },
         ])
         .then((res) => {
-            let query = db.query(`INSERT INTO role (title, salary) 
-            VALUES (res.title, res.salary)`,
+            let query = db.query("INSERT INTO role SET ?",
+            {
+                ID_PK: res.ID_PK,
+                title: res.title,
+                salary: res.salary,
+                department_id: res.department_id
+            },
             (err, res) => {
                 if (err) throw err
                 console.log(res)
@@ -127,14 +162,22 @@ function add() {
     function addDepartment() {
         inquirer.prompt([
             {
+                name: "ID_PK",
+                type: "number",
+                message: "What is the department ID?"
+            },
+            {
                 name: "name",
                 type: "input",
                 message: "What is name of the department?"
             }
         ])
         .then((res) => {
-            let query = db.query(`INSERT INTO role (name) 
-            VALUES (res.name)`,
+            let query = db.query("INSERT INTO role SET ?",
+            {
+                ID_PK: res.ID_PK,
+                    name: res.name,
+            },
             (err, res) => {
                 if (err) throw err
                 console.log(res)
@@ -168,23 +211,63 @@ function view() {
     )
     
     function viewEmployee() {
-        let viewquery = "SELECT id, first_name, last_name, title AS job_titles FROM role WHERE id=employee_role_id"; //, department FROM department WHERE id=employee_role_id, salary AS salaries FROM role WHERE id=employee_role_id, manager_name AS manager FROM employee
-        db.query(viewquery, function (err, res) {
+        let viewEmployeeQuery = "SELECT id, first_name, last_name, title AS role, name AS department, salary, manager_name AS manager FROM employee E LEFT JOIN role R on E.role_id = R.ID_PK JOIN department D on D.ID_PK = R.ID_PK";
+        db.query(viewEmployeeQuery, function (err, res) {
             console.table(res);
             startquestion();
         })
     }
     
     function viewDepartment() {
-
-
+        let viewDepartmentQuery = "SELECT ID_PK, name AS department_name FROM department";
+        db.query(viewDepartmentQuery, function (err, res) {
+            console.table(res);
+            startquestion();
+        })
     }
     
     function viewRole() {
-
+        let viewRoleQuery = "SELECT ID_PK, title AS role_title, name AS department, salary FROM role R LEFT JOIN department D on D.ID_PK = R.department_id";
+        db.query(viewRoleQuery, function (err, res) {
+            console.table(res);
+            startquestion();
+        })
     }
 }
 
-function updateRole() {
-
+function updateEmployeeRole() {
+    db.query("SELECT id, first_name, last_name from employee", (err, employeeRes) => {
+        if (err) throw err;
+        // transform the data to be used in inquirer
+        const organizedEmployeeData = employeeRes.map(({ id, first_name, last_name }) => `${id}: ${first_name} ${last_name}`)
+        db.query("SELECT id, title from role", (err, roleRes) => {
+            if (err) throw err;
+            const organizedRoleData = roleRes.map(({ id, title }) => `${id}: ${title}`);
+            // evidence collected above
+            // start the investigation below
+            inquirer.prompt([
+                {
+                    // identify dwight
+                    type: "list",
+                    choices: organizedEmployeeData,
+                    name: "targetEmp",
+                    message: "Whose role needs to change?"
+                }, {
+                    // whats the new role we wanna give him? -- what are all the roles available?
+                    type: "list",
+                    choices: organizedRoleData,
+                    name: "targetRole",
+                    message: "What is their new role?"
+                }
+            ]).then(({ targetEmp, targetRole }) => {
+                let id = targetEmp.split(":")[0]; // targetEmp = "6: Dwifht Shrute"
+                let role_ID = targetRole.split(":")[0];
+                db.query("UPDATE employee SET role_ID = ? WHERE id = ?", [role_ID, id], (err, success) => {
+                    if (err) throw err;
+                    console.log(`Your changes were successful`);
+                    startquestion();
+                })
+            })
+        })
+    })
 }
