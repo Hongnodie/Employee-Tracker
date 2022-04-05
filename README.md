@@ -77,7 +77,7 @@
   [Join 3 Tables (or More) in SQL](https://www.dofactory.com/sql/join-3-tables)-How to Join 3 Tables (or More) in SQL <br>
   </details>
 
-  #### Demo <br>
+  #### Demo
   ![Demo](./asset/Demo.png)
 
   ## Screenshot
