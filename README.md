@@ -73,7 +73,7 @@
 
   <details>
   <summary>Demo</summary>
-  ![Demo](./asset/Demo.png)
+  [Demo](./asset/Demo.png)
   </details>
 
   ## Screenshot
