@@ -1,9 +1,4 @@
 // npm packages induce
-// Take charge of directory path, See documentation at https://nodejs.org/docs/latest/api/path.html
-// const path = require("path")
-
-// file-system alais fs Provide basic functions in node.js, See documentation at https://www.npmjs.com/package/file-system
-// const fs = require("fs")
 
 // easy and fast way of applying mysql, examples provided here at https://www.npmjs.com/package/mysql2
 const mysql = require("mysql2");
