@@ -19,7 +19,7 @@
 
   If you would prefer to run this page on your local machine simply clone the repo and run the command `npm i` in your terminal. This will download all the dependencies you need to run the project. 
 
-  ![Employee-Tracker Instruction](https://drive.google.com/file/d/1r_QTvatfvBzdx9O4peyzioPRIwdILydC/view) <br>
+  [Employee-Tracker Instruction](https://drive.google.com/file/d/1r_QTvatfvBzdx9O4peyzioPRIwdILydC/view) <br>
   
   Available also at https://watch.screencastify.com/v/8lh3Ujn0YT4elGl9caij
 
