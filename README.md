@@ -25,6 +25,22 @@
   npm install console.table --save
   ```
 
+  Next is to initiate the database by using the following code (each line is a command--press enter after each):
+  ```
+  mysql -u root -p
+  <password>
+  SOURCE db/tracker.sql;
+  SOURCE db/seed.sql;
+  exit
+  ```
+
+  Then use the following command to start this app in shell (right click and open integrated terminal):
+
+  ```
+  node app.js
+  ```
+
+  See instruction video at
   [Employee-Tracker Instruction](https://drive.google.com/file/d/1r_QTvatfvBzdx9O4peyzioPRIwdILydC/view) <br>
   
   Available also at https://watch.screencastify.com/v/8lh3Ujn0YT4elGl9caij
