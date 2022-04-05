@@ -83,6 +83,7 @@
   ## Screenshot
 
   ![Screenshot of app](./asset/Employee-Tracker_Screenshot.png | width=100)
+  <img src="./asset/Employee-Tracker_Screenshot.png" width="600">
 
   [See code package at Github](https://github.com/Hongnodie/Employee-Tracker.git)
   
