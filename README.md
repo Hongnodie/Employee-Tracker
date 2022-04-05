@@ -17,7 +17,13 @@
 
   ## Installation
 
-  If you would prefer to run this page on your local machine simply clone the repo and run the command `npm i` in your terminal. This will download all the dependencies you need to run the project. 
+  If you would prefer to run this page on your local machine simply clone the repo and run the command `npm i` in your terminal. This will download all the dependencies you need to run the project. Alternatively, each dependancies can be installed one after another as:
+
+  ```
+  npm install mysql2
+  npm install inquirer
+  npm install console.table --save
+  ```
 
   [Employee-Tracker Instruction](https://drive.google.com/file/d/1r_QTvatfvBzdx9O4peyzioPRIwdILydC/view) <br>
   
@@ -71,14 +77,12 @@
   [Join 3 Tables (or More) in SQL](https://www.dofactory.com/sql/join-3-tables)-How to Join 3 Tables (or More) in SQL <br>
   </details>
 
-  <details>
-  <summary>Demo</summary>
-  [Demo](./asset/Demo.png)
-  </details>
+  #### Demo <br>
+  ![Demo](./asset/Demo.png)
 
   ## Screenshot
 
-  ![Screenshot of app](./asset/Employee-Tracker_Screenshot.png)
+  ![Screenshot of app](./asset/Employee-Tracker_Screenshot.png | width=100)
 
   [See code package at Github](https://github.com/Hongnodie/Employee-Tracker.git)
   
