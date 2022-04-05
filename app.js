@@ -78,11 +78,11 @@ function add() {
 
     function addEmployee() {
         inquirer.prompt([
-            {
-                name: "id",
-                type: "number",
-                message: "What is the employee's id?"
-            },
+            // {
+            //     name: "id",
+            //     type: "number",
+            //     message: "What is the employee's id?"
+            // },
             {
                 name: "first_name",
                 type: "input",
@@ -104,19 +104,19 @@ function add() {
                 message: "What is the manager's id number?"
             }
         ])
-       .then(function (res) {
+       .then((res, err) => {
             db.query('INSERT INTO employee SET ?',
                 {
-                    id: res.id,
+                    // id: 22,
                     first_name: res.first_name,
                     last_name: res.last_name,
                     role_id: res.role_id,
                     manager_id: res.manager_id,
                 },
-                (err, res) => {
+                (err) => {
                     if (err) throw err;
                 });
-            startquestion();
+                startquestion();
             }
         )
     }
@@ -166,9 +166,10 @@ function add() {
             {
                 name: res.name
             },
-            (err, res) => {
+            (err) => {
                 if (err) throw err
-            });
+            }
+            );
             startquestion();
         })
     }
